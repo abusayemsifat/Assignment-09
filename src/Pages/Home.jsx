@@ -1,10 +1,17 @@
 import React from 'react';
 import Slider from '../Components/Slider';
+import PopularSection from '../Components/PopularSection';
+import MeetOurVets from '../Components/MeetOurVets';
 
 const Home = () => {
     return (
         <div>
+            <title>Home</title>
             <Slider></Slider>
+            <div className='w-11/12 mx-auto'>
+                <PopularSection></PopularSection>
+                <MeetOurVets></MeetOurVets>
+            </div>
         </div>
     );
 };
