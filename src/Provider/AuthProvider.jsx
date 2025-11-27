@@ -36,7 +36,8 @@ const AuthProvider = ({ children }) => {
         registerWithEmailPassword,
         setUser,
         user,
-        handleGoogleSignin
+        handleGoogleSignin,
+        loading
     }
 
     return (

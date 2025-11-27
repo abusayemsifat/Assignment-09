@@ -4,6 +4,8 @@ import Home from "../Pages/Home";
 import Services from "../Pages/Services";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import Profile from "../Pages/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,8 +25,12 @@ const router = createBrowserRouter([
           element: <Login></Login>
         },
         {
-          path: 'signup',
+          path: '/signup',
           element: <Register></Register>
+        },
+        {
+          path: '/profile',
+          element: <PrivateRoute> <Profile></Profile> </PrivateRoute>
         }
     ]
   },
