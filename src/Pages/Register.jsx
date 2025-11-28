@@ -18,6 +18,7 @@ const Register = () => {
 
         registerWithEmailPassword(email, pass)
             .then((userCredential) => {
+                
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photoUrl
                 }).then(() => {
