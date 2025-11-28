@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import auth from '../Firebase/firebase.config';
@@ -18,11 +18,12 @@ const Register = () => {
 
         registerWithEmailPassword(email, pass)
             .then((userCredential) => {
-                
+
                 updateProfile(auth.currentUser, {
                     displayName: name, photoURL: photoUrl
                 }).then(() => {
                     setUser(userCredential.user)
+                    Navigate(location.state)
                 }).catch((error) => {
                     console.log(error)
                 });
@@ -39,6 +40,7 @@ const Register = () => {
         .then(result=>{
             const user = result.user
             setUser(user)
+            Navigate(location.state)
         })
         .catch(err=> console.log(err))
     }
