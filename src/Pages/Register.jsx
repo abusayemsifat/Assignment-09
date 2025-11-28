@@ -16,6 +16,22 @@ const Register = () => {
         const photoUrl = e.target.photoUrl.value;
 
 
+        const uppercase = /[A-Z]/;
+        const lowercase = /[a-z]/;
+
+        if (pass.length < 6) {
+            return alert("less than 6 charecters")
+        }
+
+        if (!uppercase.test(pass)) {
+            return alert("Need an Uppercase")
+        }
+
+        if (!lowercase.test(pass)) {
+            return alert("Need a Lowercase")
+        }
+
+
         registerWithEmailPassword(email, pass)
             .then((userCredential) => {
 
@@ -35,14 +51,14 @@ const Register = () => {
 
     console.log(user);
 
-    const googleSignup = ()=>{
+    const googleSignup = () => {
         handleGoogleSignin()
-        .then(result=>{
-            const user = result.user
-            setUser(user)
-            Navigate(location.state)
-        })
-        .catch(err=> console.log(err))
+            .then(result => {
+                const user = result.user
+                setUser(user)
+                Navigate(location.state)
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -62,7 +78,7 @@ const Register = () => {
                                 <label className="label">Password</label>
                                 <input name='password' type="password" className="input" placeholder="Password" />
 
-                                    <button onClick={googleSignup} className="btn"><FcGoogle /></button>
+                                <button onClick={googleSignup} className="btn"><FcGoogle /></button>
 
                                 <div><a className="link link-hover">Forgot password?</a></div>
                                 <div><span>Already have an account? </span><Link className='text-blue-500' to='/login'>Login</Link></div>

@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import auth from '../Firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProvider';
@@ -11,11 +11,14 @@ const Login = () => {
     const location = useLocation();
     console.log(location)
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const pass = e.target.password.value;
+
+       
 
         signInWithEmailAndPassword(auth, email, pass)
             .then((userCredential) => {
@@ -33,9 +36,13 @@ const Login = () => {
         .then(result=>{
             const user = result.user
             setUser(user)
-            navigate(location.state)
+            navigate(location.state? location.state : '/')
         })
         .catch(err=> console.log(err))
+    }
+
+    const handleForget = () =>{
+        navigate(`/forget/${email}`)
     }
 
     return (
@@ -46,12 +53,12 @@ const Login = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit} className="fieldset">
                                 <label className="label">Email</label>
-                                <input name='email' type="email" className="input" placeholder="Email" />
+                                <input onChange={(e) => setEmail(e.target.value)} name='email' type="email" className="input" placeholder="Email" />
 
                                 <label className="label">Password</label>
                                 <input name='password' type="password" className="input" placeholder="Password" />
 
-                                <div><a className="link link-hover">Forgot password?</a></div>
+                                <div><button onClick={handleForget} className="link link-hover">Forgot password?</button></div>
 
                                     <button onClick={googleSignin} className="btn"><FcGoogle /></button>
 
